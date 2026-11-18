@@ -13,8 +13,8 @@ export const CONFIG = {
 
   // Optional private album (Supabase). Leave blank to disable saving.
   supabase: {
-    url: "",      // e.g. https://abcd1234.supabase.co
-    anonKey: "",  // the public anon key, safe to ship in the browser
+    url: "https://obaxouatziyvpcfwnhsh.supabase.co",
+    anonKey: "sb_publishable_e-c-82O-dIyBnHSssCDQfw_nZ0ABHCF",  // the public anon key, safe to ship in the browser
     bucket: "booth-strips",
   },
 };
