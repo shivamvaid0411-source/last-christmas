@@ -138,10 +138,6 @@ async function run() {
   requestAnimationFrame(() => el.drop.classList.add("is-dropping"));
   el.dlStrip.hidden = el.dlSheet.hidden = el.again.hidden = false;
 
-  if (storageEnabled() && el.consent.checked) {
-    try { await uploadSheet(await toAlbumBlob(sheet)); say("Saved to the private album."); }
-    catch { say("Could not save to the album. Your download still works."); }
-  }
 }
 
 function download(blob, name) {
