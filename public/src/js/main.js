@@ -13,7 +13,7 @@ const el = {
   thumbs: [...$("thumbs").children], segs: [...$("segments").querySelectorAll("i")],
   lines: [...$("lines").children], developFill: $("developFill"), blurb: $("blurb"),
   dispenser: $("dispenser"), drop: document.querySelector(".drop"), stripA: $("stripA"), stripB: $("stripB"),
-  consent: $("consent"), consentRow: $("consentRow"), timerBtns: [...document.querySelectorAll("[data-seconds]")], lookBtns: [...document.querySelectorAll("[data-look]")],
+  consent: $("consent"), timerBtns: [...document.querySelectorAll("[data-seconds]")], lookBtns: [...document.querySelectorAll("[data-look]")],
 };
 const BLURB = el.blurb.textContent;
 
@@ -34,7 +34,6 @@ const markLines = (active) => el.lines.forEach((li, i) => {
 });
 
 startSnow($("snow"));
-if (storageEnabled()) el.consentRow.hidden = false;
 
 el.timerBtns.forEach((btn) =>
   btn.addEventListener("click", () => {
