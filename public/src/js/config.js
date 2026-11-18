@@ -4,8 +4,7 @@ export const CONFIG = {
   defaultTimer: 3,
   // One caption per shot, shown under the camera while its countdown runs.
   lines: ["Once bitten,", "twice shy.", "I keep my distance,", "but you still catch my eyes."],
-  photo: { width: 960, height: 1200 }, // captured at 4:5, full quality
-  grain: { amount: 26, contrast: 1.18, brightness: 6 },
+  photo: matchMedia("(max-width: 700px)").matches ? { width: 720, height: 900 } : { width: 960, height: 1200 },  grain: { amount: 26, contrast: 1.18, brightness: 6 },
   brand: "MISTLETOE BOOTH",
 
   // Size of the copy saved to the album. The visitor's own PNG download stays full quality.

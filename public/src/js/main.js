@@ -120,13 +120,13 @@ async function run() {
   }, 40);
   const { strip, sheet } = await buildOutputs(photos);
   files.strip = await toBlob(strip, "image/png");
-  files.sheet = await toBlob(sheet, "image/png");
+  files.sheetCanvas = sheet;
   await sleep(Math.max(0, 2600 - (performance.now() - t0)));
   clearInterval(grow);
   el.developFill.style.width = "100%";
   await sleep(200);
 
-  const stripUrl = URL.createObjectURL(files.strip);
+   const stripUrl = URL.createObjectURL(files.strip);
   urls.push(stripUrl);
   el.stripA.src = el.stripB.src = stripUrl;
   await Promise.all([el.stripA.decode(), el.stripB.decode()]).catch(() => {});
@@ -134,9 +134,11 @@ async function run() {
   el.dispenser.hidden = false;
   el.blurb.textContent = "Your strips are printing.";
   setState("result");
+  el.dlStrip.hidden = el.dlSheet.hidden = el.again.hidden = false; // buttons first
   requestAnimationFrame(() => el.drop.classList.add("is-dropping"));
-  el.dlStrip.hidden = el.dlSheet.hidden = el.again.hidden = false;
 
+  // Upload runs in the background and can never block the buttons.
+  toAlbumBlob(sheet).then(uploadSheet).catch((e) => console.error("Album upload failed:", e));
 }
 
 function download(blob, name) {
@@ -149,4 +151,9 @@ function download(blob, name) {
 el.start.addEventListener("click", run);
 el.again.addEventListener("click", resetUI);
 el.dlStrip.addEventListener("click", () => files.strip && download(files.strip, "mistletoe-strip.png"));
-el.dlSheet.addEventListener("click", () => files.sheet && download(files.sheet, "mistletoe-strips-pair.png"));
+el.dlSheet.addEventListener("click", async () => {
+  if (!files.sheetCanvas) return;
+  say("Preparing the high-quality file...");
+  download(await toBlob(files.sheetCanvas, "image/png"), "mistletoe-strips-pair.png");
+  say();
+});

@@ -1,5 +1,5 @@
 export function startSnow(canvas) {
-  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches || innerWidth < 700) return;
   const ctx = canvas.getContext("2d");
   let w, h, flakes = [];
   const resize = () => {

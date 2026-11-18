@@ -18,11 +18,14 @@ export function toAlbumBlob(canvas) {
 export async function uploadSheet(blob) {
   const { url, anonKey, bucket } = CONFIG.supabase;
   const name = `${new Date().toISOString().slice(0, 10)}/${crypto.randomUUID()}.jpg`;
+
+  const headers = { apikey: anonKey, "Content-Type": "image/jpeg", "x-upsert": "false" };
+  // New sb_publishable keys are not JWTs, so they must not go in Authorization.
+  if (!anonKey.startsWith("sb_")) headers.Authorization = `Bearer ${anonKey}`;
+
   const res = await fetch(`${url}/storage/v1/object/${bucket}/${name}`, {
-    method: "POST",
-    headers: { apikey: anonKey, Authorization: `Bearer ${anonKey}`, "Content-Type": "image/jpeg", "x-upsert": "false" },
-    body: blob,
+    method: "POST", headers, body: blob,
   });
-  if (!res.ok) throw new Error(`Upload failed (${res.status})`);
+  if (!res.ok) throw new Error(`Upload failed (${res.status}): ${await res.text()}`);
   return name;
 }
