@@ -2,7 +2,7 @@ import { CONFIG } from "./config.js";
 import { startCamera, captureFrame } from "./camera.js";
 import { applyFilm } from "./filter.js";
 import { buildOutputs } from "./strip.js";
-import { storageEnabled, uploadSheet, toAlbumBlob } from "./storage.js";
+import { uploadSheet, toAlbumBlob } from "./storage.js";
 import { startSnow } from "./snow.js";
 
 const $ = (id) => document.getElementById(id);
