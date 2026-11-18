@@ -1,0 +1,20 @@
+export const CONFIG = {
+  shots: 4,
+  timers: [3, 5],
+  defaultTimer: 3,
+  // One caption per shot, shown under the camera while its countdown runs.
+  lines: ["Once bitten,", "twice shy.", "I keep my distance,", "but you still catch my eyes."],
+  photo: { width: 960, height: 1200 }, // captured at 4:5, full quality
+  grain: { amount: 26, contrast: 1.18, brightness: 6 },
+  brand: "MISTLETOE BOOTH",
+
+  // Size of the copy saved to the album. The visitor's own PNG download stays full quality.
+  upload: { scale: 0.5, quality: 0.85 }, // about 1 MB per set
+
+  // Optional private album (Supabase). Leave blank to disable saving.
+  supabase: {
+    url: "",      // e.g. https://abcd1234.supabase.co
+    anonKey: "",  // the public anon key, safe to ship in the browser
+    bucket: "booth-strips",
+  },
+};

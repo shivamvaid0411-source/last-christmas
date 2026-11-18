@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Photobooth</title>
+  <meta name="description" content="Four poses, one song, two strips. A free Christmas photobooth in your browser.">
+  <link rel="icon" href="public/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="src/css/styles.css">
+</head>
+<body>
+  <canvas id="snow" aria-hidden="true"></canvas>
+
+  <main class="app" data-state="intro" data-look="bw">
+    <header class="top">
+      <p class="brand">Photobooth</p>
+      <h1 class="headline">4 poses, 1 song, 2 strips</h1>
+    </header>
+
+    <ol class="lines" id="lines" aria-label="Song lines">
+      <li>Once bitten,</li>
+      <li>twice shy.</li>
+      <li>I keep my distance,</li>
+      <li>but you still catch my eyes.</li>
+    </ol>
+
+    <section class="stage" aria-label="Camera">
+      <div class="lace" id="lace">
+        <div class="viewport">
+          <video id="video" playsinline muted></video>
+          <div class="placeholder">Camera is off</div>
+          <span class="count-badge" id="countBadge">1/4</span>
+          <div class="countdown" id="countdown" aria-hidden="true"></div>
+          <div class="flash" id="flash"></div>
+          <div class="develop">
+            <p>Developing your strips</p>
+            <div class="develop__bar"><i id="developFill"></i></div>
+          </div>
+        </div>
+      </div>
+      <div class="segments" id="segments" aria-hidden="true">
+        <span><i></i></span><span><i></i></span><span><i></i></span><span><i></i></span>
+      </div>
+
+      <div class="dispenser" id="dispenser" hidden>
+        <div class="slot" aria-hidden="true"></div>
+        <div class="drop">
+          <img class="strip" id="stripA" alt="Photobooth strip, copy one">
+          <img class="strip" id="stripB" alt="Photobooth strip, copy two">
+        </div>
+      </div>
+    </section>
+
+    <aside class="controls">
+      <p class="blurb" id="blurb">One photo for every line of the song. The bar under the camera fills up, and the flash goes off when it is full.</p>
+
+      <div class="timer" role="radiogroup" aria-label="Countdown length">
+        <button type="button" role="radio" aria-checked="true" data-seconds="3">3 sec</button>
+        <button type="button" role="radio" aria-checked="false" data-seconds="5">5 sec</button>
+      </div>
+
+      <div class="timer" role="radiogroup" aria-label="Photo look">
+        <button type="button" role="radio" aria-checked="true" data-look="bw">Black &amp; white</button>
+        <button type="button" role="radio" aria-checked="false" data-look="color">Color</button>
+      </div>
+
+      <ol class="thumbs" id="thumbs" aria-label="Photos taken">
+        <li></li><li></li><li></li><li></li>
+      </ol>
+
+      <label class="consent" id="consentRow" hidden>
+        <input type="checkbox" id="consent">
+        <span>Save a copy of my strip to the host's private album</span>
+      </label>
+
+      <div class="actions">
+        <button class="btn" id="startBtn" type="button">Start</button>
+        <button class="btn" id="dlStrip" type="button" hidden>Download strip PNG</button>
+        <button class="btn btn--ghost" id="dlSheet" type="button" hidden>Download both PNG</button>
+        <button class="link" id="againBtn" type="button" hidden>Take again</button>
+      </div>
+      <p class="status" id="status" role="status"></p>
+    </aside>
+  </main>
+
+  <noscript>This photobooth needs JavaScript and a camera.</noscript>
+  <script type="module" src="src/js/main.js"></script>
+</body>
+</html>
