@@ -5,7 +5,7 @@ export const CONFIG = {
   // One caption per shot, shown under the camera while its countdown runs.
   lines: ["Once bitten,", "twice shy.", "I keep my distance,", "but you still catch my eyes."],
   photo: matchMedia("(max-width: 700px)").matches ? { width: 720, height: 900 } : { width: 960, height: 1200 },  grain: { amount: 26, contrast: 1.18, brightness: 6 },
-  brand: "MISTLETOE BOOTH",
+  brand: "PHOTOBOOTH",
 
   // Size of the copy saved to the album. The visitor's own PNG download stays full quality.
   upload: { scale: 0.5, quality: 0.85 }, // about 1 MB per set
